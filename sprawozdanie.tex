@@ -1,0 +1,345 @@
+\documentclass[12pt,a4paper,twoside]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage[utf8]{inputenc}                                      
+\usepackage[OT4]{fontenc}      
+%\usepackage[T1]{fontenc}                            
+\usepackage[polish]{babel}                           
+\selectlanguage{polish}
+\usepackage{indentfirst} 
+\usepackage[dvips]{graphicx}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{hyperref} 
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{ifpdf}
+\usepackage{mathtext} % polskie znaki w trybie matematycznym
+%\makeindex  % utworzenie skorowidza (w dokumencie pdf)
+\usepackage{lmodern}
+%\usepackage[osf]{libertine}
+\usepackage{filecontents}
+\usepackage{ifthen}
+\usepackage{spverbatim}
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+
+\newcounter{nextYear}
+\setcounter{nextYear}{\the\year}
+\stepcounter{nextYear}
+
+% rozszerzenie nieco strony
+%\setlength{\topmargin}{-1cm} \setlength{\textheight}{24.5cm}
+%\setlength{\textwidth}{17cm} \addtolength{\hoffset}{-1.5cm}
+%\setlength{\parindent}{0.5cm} \setlength{\footskip}{2cm}
+%\linespread{1.2} % odstep pomiedzy wierszami
+
+
+%%%% ZYWA PAGINA %%%%%%%%%%%
+\newcommand{\tl}[1]{\textbf{#1}} 
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} % usuwanie bieżących ustawień
+\fancyhead[LE,RO]{\small\bfseries\thepage}
+\fancyhead[LO]{\small\bfseries\rightmark}
+\fancyhead[RE]{\small\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % pionowy odstęp na kreskę
+\fancypagestyle{plain}{%
+\fancyhead{} % usuń p. górne na stronach pozbawionych numeracji
+\renewcommand{\headrulewidth}{0pt} % pozioma kreska
+}
+
+%%%%%   LISTINGI %%%%%%%%
+% ustawienia listingu programow
+
+\lstset{%
+language=C++,%
+commentstyle=\textit,%
+identifierstyle=\textsf,%
+keywordstyle=\sffamily\bfseries, %
+%captionpos=b,%
+tabsize=3,%
+frame=lines,%
+numbers=left,%
+numberstyle=\tiny,%
+numbersep=5pt,%
+breaklines=true,%
+morekeywords={pWezel,Wezel,string,ref,params_result},%
+escapeinside={(*@}{@*)},%
+%basicstyle=\footnotesize,%
+%keywords={double,int,for,if,return,vector,matrix,void,public,class,string,%
+%float,sizeof,char,FILE,while,do,const}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%  NOTKI NA MARGINESIE %%%%%%%%%%%%%
+% mala zmiana sposobu wyswietlania notek bocznych
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{%
+  {\linespread{0.85}\normalfont\scriptsize%
+\oldmarginpar[\hspace{1cm}\begin{minipage}{3cm}\raggedleft\scriptsize\color{black}\textsf{#1}\end{minipage}]%    left pages
+{\hspace{0cm}\begin{minipage}{3cm}\raggedright\scriptsize\color{black}\textsf{#1}\end{minipage}}% right pages
+}%
+}
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+%%%% WYSWIETLANIE AKTUALNEGO ROKU AKADEMICKIEGO %%%%%%%%%%%
+\newcounter{rok}
+\newcommand{\rokakademicki}{%
+   \setcounter{rok}{\number\year}%
+   \ifthenelse{\number\month<10}%
+   {\addtocounter{rok}{-1}}% rok akademicki zaczal sie w pazdzierniku poprzedniego roku
+   {}%                       rok akademicki zaczyna sie w pazdzierniku tego roku
+   \arabic{rok}/\addtocounter{rok}{1}\arabic{rok}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% LISTA UWAG %%%%%%%%%
+\usepackage{color}
+\definecolor{brickred}      {cmyk}{0   , 0.89, 0.94, 0.28}
+
+\makeatletter \newcommand \kslistofremarks{\section*{Uwagi} \@starttoc{rks}}
+\newcommand\l@uwagas[2]
+{\par\noindent \textbf{#2:} %\parbox{10cm}
+   {#1}\par} \makeatother
+
+
+\newcommand{\ksremark}[1]{%
+   {{\color{brickred}{[#1]}}}%
+   \addcontentsline{rks}{uwagas}{\protect{#1}}%
+}
+
+\newcommand{\comma}{\ksremark{przecinek}}
+\newcommand{\nocomma}{\ksremark{bez przecinka}}
+\newcommand{\styl}{\ksremark{styl}}
+\newcommand{\ortografia}{\ksremark{ortografia}}
+\newcommand{\fleksja}{\ksremark{fleksja}}
+\newcommand{\pauza}{\ksremark{pauza `--', nie dywiz `-'}}
+\newcommand{\kolokwializm}{\ksremark{kolokwializm}}
+\newcommand{\cytowanie}{\ksremark{cytowanie}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% autor:
+\fancyhead[RE]{\small\bfseries Adam Fudala} % autor sprawozdania
+
+
+
+%%%%%%%%%%% NO I ZACZYNA SIE SPRAWOZDANIE %%%%%%%%%%%
+
+\begin{document}
+\frenchspacing
+\thispagestyle{empty}
+\begin{center}
+{\Large\sf Politechnika Śląska   % Alma Mater
+
+Wydział Informatyki, Elektroniki i Informatyki
+
+}
+
+\vfill
+
+ 
+
+\vfill\vfill
+
+{\Huge\sffamily\bfseries Podstawy Programowania Komputerów\par}  
+
+\vfill\vfill
+
+{\LARGE\sf Kurier}   
+
+
+\vfill \vfill\vfill\vfill
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\begin{tabular}{ll}
+	\toprule
+	autor                       & Adam Fudala    \\
+	prowadzący                  &  \\dr. inż. Marcin Połomski
+	rok akademicki              & \rokakademicki         \\
+	kierunek                    & informatyka            \\
+	rodzaj studiów              & SSI                    \\
+	semestr                     & 1                      \\
+	termin laboratorium         & poniedziałek, 08:30 -- 10:00 \\
+	sekcja                      & 21            \\
+	termin oddania sprawozdania & 2019-01-25            \\
+	\bottomrule
+	                            &
+\end{tabular}
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Treść zadania}
+\marginpar{}
+Kurier ma za zadanie zawieźć towar do klientów w różnych lokalizacjach i powrócić do miejsca, z którego
+wyjechał. Kurier musi odwiedzić każdego klienta raz i tylko raz. Należy znaleźć zamkniętą najkrótszą drogę,
+która umożliwia odwiedzenie wszystkich klientów. W pliku wejściowym zapisane są długości dróg pomiędzy
+miastami. Drogi zapisane są w następujący sposób \begin{verbatim}(<klient A> - <klient B>: <odległość>)\end{verbatim}. Niektóre drogi
+nie są symetryczne, tzn. jest pewna różnica między drogą tam a z powrotem. Zapis\begin{verbatim} (<klient C> -> <klient D> : <odległość CD>)\end{verbatim}, oznacza długość drogi jednokierunkowej od klienta C do klienta D. Poszczególne
+drogi są rozdzielone przecinkami. Nie jest podana liczba dróg. Jeżeli nie jest możliwe wyznaczenie drogi,
+program zgłasza odpowiedni komunikat. \newline 
+Przykładowy plik wejściowy: \newline\newline
+\begin{verbatim}
+(1 - 2 : 4.5), (4 -> 3:
+4.5),
+(4 - 2: 0.4)\newline
+\end{verbatim}
+W pliku wynikowym należy zapisać drogę kuriera (kolejność odwiedzania klientów i długość drogi).
+\indent Program uruchamiany jest z linii poleceń z wykorzystaniem następujących przełączników: \newline
+\begin{tabular}{ll}
+\indent \texttt{-i} & plik wejściowy  z drogami między klientami\\
+\indent \texttt{-d} & plik wyjściowy  ze znalezioną drogą kuriera\\
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analiza zadania}
+\marginpar{}
+
+Zagadnienie przedstawia problem wyznaczenia różnych dróg kuriera, gdzie przechodzi on między wszystkimi klientami tylko raz i wraca na początek trasy
+
+\subsection{Struktury danych}
+\marginpar{}
+W programie wykorzystano listę podwieszaną. Lista nadrzędna przechowuje informację z \texttt{miastami początkowymi}. Lista nadrzędna zawiera wskaźnik na listę podrzędną, która przechowuje informacje o \texttt{mieście docelowym}  i \texttt{odległości}. Lista miast odwiedzonych przechowuje informację o \texttt{długości trasy} i wskazuje  na elementy zawierające odwiedzane po koleii \texttt{miasta}. Zdecydowałem, żeby użyć listy, ponieważ najlepiej odzwierciedlała rodzaj danych używanych w programie i pozwalała na wypisywanie klientów w określonej liście.
+
+
+
+
+
+\subsection{Algorytmy}
+\marginpar{}
+Algorytm wykorzystuje rekurencję do wyznaczenia wszystkich tras z każdego wierzchołka grafu. Za każdym przejściem sprawdza, czy wszystkie wierzchołki już odwiedzono. Szuka miast w liście podwieszanej danego elementu i sprawdza czy te miasta znajdują się na liście odwiedzonych miast. Jeżeli miasta tam nie ma algorytm szuka go na liście miast początkowych i dodaje do listy odwiedzonych. W przeciwnym wypadku wyznacza nową trasę. Długość trasy jest porównywana z minimalną i nadpisywana.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specyfikacja zewnętrzna}
+\marginpar{}
+
+Program jest uruchamiany z linii poleceń. 
+Przy wywoływaniu programu możliwe jest użycie przełączników   \texttt{-i} oraz \texttt{-d}\\ 
+Po wykorzystaniu przełącznika  \texttt{-i} należy przekazać do programu nazwę pliku wejściowego. Po wykorzystaniu przełącznika  \texttt{-i} należy przekazać do programu nazwę pliku wejściowego. Domyślny format pliku to txt.
+\begin{verbatim}
+./main -i plik.txt
+./main -d plik.txt
+\end{verbatim}
+
+Program zapisuje plan zajęć w pliku tekstowym w folderze zewnętrznym \texttt{pliki}. 
+Pliki wejściowe mogą mieć dowolne rozszerzenie (lub go nie mieć.).
+
+
+
+\begin{verbatim}
+./main -i plik
+\end{verbatim}
+Uruchomienie programu z parametrem \texttt{-i} powoduje otwarcie pliku \texttt{plik.txt}  zawierającego odległości między poszczególnymi klientami. 
+
+
+
+
+
+
+Uruchomienie programu z parametrem \texttt{-d} powoduje otwarcie pliku \texttt{plik.txt}  i zapisanie do niego ostatecznej trasy. 
+Podanie nieprawidłowej nazwy pliku wejściowego powoduje wyświetlenie odpowiedniego komunikatu:
+\begin{verbatim}
+Nie znaleziono pliku wejściowego
+\end{verbatim}
+Podanie nieprawidłowej nazwy pliku wyjściowego powoduje wyświetlenie odpowiedniego komunikatu:
+\begin{verbatim}
+Nie znaleziono pliku wyjściowego
+\end{verbatim}
+
+Podanie danych niewystarczających do wyznaczenia trasy powoduje wyświetlenie komuniktu
+\begin{verbatim}
+Zbyt mało danych, aby wyznaczyć trasę
+\end{verbatim}
+
+
+
+
+\subsection{Ogólna struktura programu}
+\marginpar{}
+Wywoływana jest funkcja \lstinline|wczytajGraf|, która wczytuje dane z pliku do listy podwieszanej. 
+Następnie w pętli wywoływana jest funkcja \lstinline|wyznaczNajlepszaTrase|. 
+Funkcja przechodzi rekurencyjnie przez listę, wpisuje do listy miast odwiedzonych każdą trasę. 
+Zapisywana jest tylko najkrótsza trasa. Po jej wyznaczeniu funkcja \lstinline|zapiszDoPliku| zapisuje dane do pliku.
+
+
+
+\subsection{Szczegółowy opis typów i funkcji}
+
+Szczegółowy opis typów i funkcji zawarty jest w załączniku. 
+
+\section{Testowanie}
+\marginpar{}
+
+Kiedy podałem pusty plik, program wyświetlił komunikat \texttt{zbyt mało danych, aby wyznaczyć trasę}. Kiedy podałem takie drogi, że nie dało się wyznaczyć trasy komunikat był taki sam. 
+Gdy zamiast pliku wejściowego podałem losowy ciąg znaków, program wyświetlił komunikat \texttt{Nie znaleziono pliku wejściowego}, gdy podobnie zrobiłem z plikiem wyjściowym komunikat mówił \texttt{Nie znaleziono pliku wyjściowego}.
+
+Program został sprawdzony pod kątem wycieków pamięci przy użyciu biblioteki cstdlib i wbudowanego narzędzia visual studio.
+
+%\section{Uzyskane wyniki}
+%Jeżeli zadanie tego wymaga, wyniki można przestawić w~różny sposób, np. w tabeli ({\it vide} tabela \ref{tab:1}), czy na~rysunku ({\it vide} rycina \ref{fig:rysunek}) albo po prostu opisać uzyskane wyniki.
+%
+
+
+
+\section{Wnioski}
+\marginpar{}
+Największe trudności sprawiło mi stworzenie poprawnie działającego algorytmu, który przeszedłby po wszystkich możliwych trasach oraz ustawienie parametrów wejściowych łącznie z zabezpieczeniami. Projekt nauczył mnie głównie pracy na listach i gospodarki pamięcią. W przygotowywaniu projektu bardzo pomogła mi wiedza, którą nabyłem na laboratorium i wykładach. 
+
+ 
+\begin{filecontents}{bibliografia.bib}
+
+}
+\end{filecontents}
+
+
+
+
+ 
+\cleardoublepage
+
+\rule{0cm}{0cm}
+
+\vfill
+
+\begin{center}
+\Huge\bfseries Dodatek\\Szczegółowy opis typów i~funkcji\par
+\end{center}
+
+\vfill 
+
+\rule{0cm}{0cm}
+
+\end{document}
+% Koniec wieńczy dzieło.
